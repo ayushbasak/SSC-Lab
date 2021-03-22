@@ -1,0 +1,519 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ex1</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-03-22"><meta name="DC.source" content="ex1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput"><span class="comment">% Ayush Basak 19ucc016</span>
+
+
+t = 0:0.0001:0.05;
+Am = 10;
+fm = 200;
+fc = 2000;
+
+
+
+subplot(8,1,1)
+message = Am * cos (2 * pi * fm * t);
+plot(t, message)
+xlabel(<span class="string">"Time"</span>);
+ylabel(<span class="string">"amplitude"</span>);
+title(<span class="string">"Message Signal"</span>)
+
+mu = 0.3;
+
+subplot(6,1,2)
+carrier = message/mu;
+plot(t, carrier);
+xlabel(<span class="string">"Time"</span>);
+ylabel(<span class="string">"amplitude"</span>);
+title(<span class="string">"Carrier Signal"</span>)
+
+
+<span class="comment">% mu = 0.3</span>
+mu = 0.3;
+Ac = Am/mu;
+
+subplot(6,1,3)
+y_AM = (Ac * (1 + mu * cos (2 * pi * fm * t))) .* cos(2 * pi * fc * t);
+temp = y_AM
+plot(t, y_AM)
+xlabel(<span class="string">"Time"</span>);
+ylabel(<span class="string">"amplitude"</span>);
+title(<span class="string">"Modulated Signal (30 %)"</span>)
+
+<span class="comment">% mu = 0.5</span>
+mu = 0.5;
+Ac = Am/mu;
+
+subplot(6,1,4)
+y_AM = (Ac * (1 + mu * cos (2 * pi * fm * t))) .* cos(2 * pi * fc * t);
+plot(t, y_AM)
+xlabel(<span class="string">"Time"</span>);
+ylabel(<span class="string">"amplitude"</span>);
+title(<span class="string">"Modulated Signal (50 %)"</span>)
+
+<span class="comment">% mu = 1</span>
+mu = 1;
+Ac = Am/mu;
+
+subplot(6,1,5)
+y_AM = (Ac * (1 + mu * cos (2 * pi * fm * t))) .* cos(2 * pi * fc * t);
+plot(t, y_AM)
+xlabel(<span class="string">"Time"</span>);
+ylabel(<span class="string">"amplitude"</span>);
+title(<span class="string">"Modulated Signal (100 %)"</span>)
+
+subplot(6,1,6)
+demodulated = abs(hilbert(temp));
+plot(t, demodulated);
+xlabel(<span class="string">"Time"</span>);
+ylabel(<span class="string">"amplitude"</span>);
+title(<span class="string">"Dedulated Signal (30 %)"</span>)
+sgtitle(<span class="string">"Ayush Basak 19ucc016"</span>)
+
+<span class="comment">% Overmodulated</span>
+subplot(1,1,1)
+mu = 1.3;
+Ac = Am/mu;
+y_AM = (Ac * (1 + mu * cos (2 * pi * fm * t))) .* cos(2 * pi * fc * t);
+plot(t, y_AM);
+xlabel(<span class="string">"Time"</span>);
+ylabel(<span class="string">"amplitude"</span>);
+title(<span class="string">"Modulated Signal (130 %)"</span>)
+</pre><pre class="codeoutput">
+temp =
+
+  Columns 1 through 7
+
+   43.3333   13.3664  -34.8032  -34.4893   13.0085   41.4235   12.5532
+
+  Columns 8 through 14
+
+  -32.1241  -31.3022   11.6163   36.4235   10.8796  -27.4752  -26.4592
+
+  Columns 15 through 21
+
+    9.7215   30.2432    8.9848  -22.6323  -21.8104    8.0479   25.2432
+
+  Columns 22 through 28
+
+    7.5926  -19.4452  -19.1312    7.2348   23.3333    7.2348  -19.1312
+
+  Columns 29 through 35
+
+  -19.4452    7.5926   25.2432    8.0479  -21.8104  -22.6323    8.9848
+
+  Columns 36 through 42
+
+   30.2432    9.7215  -26.4592  -27.4752   10.8796   36.4235   11.6163
+
+  Columns 43 through 49
+
+  -31.3022  -32.1241   12.5532   41.4235   13.0085  -34.4893  -34.8032
+
+  Columns 50 through 56
+
+   13.3664   43.3333   13.3664  -34.8032  -34.4893   13.0085   41.4235
+
+  Columns 57 through 63
+
+   12.5532  -32.1241  -31.3022   11.6163   36.4235   10.8796  -27.4752
+
+  Columns 64 through 70
+
+  -26.4592    9.7215   30.2432    8.9848  -22.6323  -21.8104    8.0479
+
+  Columns 71 through 77
+
+   25.2432    7.5926  -19.4452  -19.1312    7.2348   23.3333    7.2348
+
+  Columns 78 through 84
+
+  -19.1312  -19.4452    7.5926   25.2432    8.0479  -21.8104  -22.6323
+
+  Columns 85 through 91
+
+    8.9848   30.2432    9.7215  -26.4592  -27.4752   10.8796   36.4235
+
+  Columns 92 through 98
+
+   11.6163  -31.3022  -32.1241   12.5532   41.4235   13.0085  -34.4893
+
+  Columns 99 through 105
+
+  -34.8032   13.3664   43.3333   13.3664  -34.8032  -34.4893   13.0085
+
+  Columns 106 through 112
+
+   41.4235   12.5532  -32.1241  -31.3022   11.6163   36.4235   10.8796
+
+  Columns 113 through 119
+
+  -27.4752  -26.4592    9.7215   30.2432    8.9848  -22.6323  -21.8104
+
+  Columns 120 through 126
+
+    8.0479   25.2432    7.5926  -19.4452  -19.1312    7.2348   23.3333
+
+  Columns 127 through 133
+
+    7.2348  -19.1312  -19.4452    7.5926   25.2432    8.0479  -21.8104
+
+  Columns 134 through 140
+
+  -22.6323    8.9848   30.2432    9.7215  -26.4592  -27.4752   10.8796
+
+  Columns 141 through 147
+
+   36.4235   11.6163  -31.3022  -32.1241   12.5532   41.4235   13.0085
+
+  Columns 148 through 154
+
+  -34.4893  -34.8032   13.3664   43.3333   13.3664  -34.8032  -34.4893
+
+  Columns 155 through 161
+
+   13.0085   41.4235   12.5532  -32.1241  -31.3022   11.6163   36.4235
+
+  Columns 162 through 168
+
+   10.8796  -27.4752  -26.4592    9.7215   30.2432    8.9848  -22.6323
+
+  Columns 169 through 175
+
+  -21.8104    8.0479   25.2432    7.5926  -19.4452  -19.1312    7.2348
+
+  Columns 176 through 182
+
+   23.3333    7.2348  -19.1312  -19.4452    7.5926   25.2432    8.0479
+
+  Columns 183 through 189
+
+  -21.8104  -22.6323    8.9848   30.2432    9.7215  -26.4592  -27.4752
+
+  Columns 190 through 196
+
+   10.8796   36.4235   11.6163  -31.3022  -32.1241   12.5532   41.4235
+
+  Columns 197 through 203
+
+   13.0085  -34.4893  -34.8032   13.3664   43.3333   13.3664  -34.8032
+
+  Columns 204 through 210
+
+  -34.4893   13.0085   41.4235   12.5532  -32.1241  -31.3022   11.6163
+
+  Columns 211 through 217
+
+   36.4235   10.8796  -27.4752  -26.4592    9.7215   30.2432    8.9848
+
+  Columns 218 through 224
+
+  -22.6323  -21.8104    8.0479   25.2432    7.5926  -19.4452  -19.1312
+
+  Columns 225 through 231
+
+    7.2348   23.3333    7.2348  -19.1312  -19.4452    7.5926   25.2432
+
+  Columns 232 through 238
+
+    8.0479  -21.8104  -22.6323    8.9848   30.2432    9.7215  -26.4592
+
+  Columns 239 through 245
+
+  -27.4752   10.8796   36.4235   11.6163  -31.3022  -32.1241   12.5532
+
+  Columns 246 through 252
+
+   41.4235   13.0085  -34.4893  -34.8032   13.3664   43.3333   13.3664
+
+  Columns 253 through 259
+
+  -34.8032  -34.4893   13.0085   41.4235   12.5532  -32.1241  -31.3022
+
+  Columns 260 through 266
+
+   11.6163   36.4235   10.8796  -27.4752  -26.4592    9.7215   30.2432
+
+  Columns 267 through 273
+
+    8.9848  -22.6323  -21.8104    8.0479   25.2432    7.5926  -19.4452
+
+  Columns 274 through 280
+
+  -19.1312    7.2348   23.3333    7.2348  -19.1312  -19.4452    7.5926
+
+  Columns 281 through 287
+
+   25.2432    8.0479  -21.8104  -22.6323    8.9848   30.2432    9.7215
+
+  Columns 288 through 294
+
+  -26.4592  -27.4752   10.8796   36.4235   11.6163  -31.3022  -32.1241
+
+  Columns 295 through 301
+
+   12.5532   41.4235   13.0085  -34.4893  -34.8032   13.3664   43.3333
+
+  Columns 302 through 308
+
+   13.3664  -34.8032  -34.4893   13.0085   41.4235   12.5532  -32.1241
+
+  Columns 309 through 315
+
+  -31.3022   11.6163   36.4235   10.8796  -27.4752  -26.4592    9.7215
+
+  Columns 316 through 322
+
+   30.2432    8.9848  -22.6323  -21.8104    8.0479   25.2432    7.5926
+
+  Columns 323 through 329
+
+  -19.4452  -19.1312    7.2348   23.3333    7.2348  -19.1312  -19.4452
+
+  Columns 330 through 336
+
+    7.5926   25.2432    8.0479  -21.8104  -22.6323    8.9848   30.2432
+
+  Columns 337 through 343
+
+    9.7215  -26.4592  -27.4752   10.8796   36.4235   11.6163  -31.3022
+
+  Columns 344 through 350
+
+  -32.1241   12.5532   41.4235   13.0085  -34.4893  -34.8032   13.3664
+
+  Columns 351 through 357
+
+   43.3333   13.3664  -34.8032  -34.4893   13.0085   41.4235   12.5532
+
+  Columns 358 through 364
+
+  -32.1241  -31.3022   11.6163   36.4235   10.8796  -27.4752  -26.4592
+
+  Columns 365 through 371
+
+    9.7215   30.2432    8.9848  -22.6323  -21.8104    8.0479   25.2432
+
+  Columns 372 through 378
+
+    7.5926  -19.4452  -19.1312    7.2348   23.3333    7.2348  -19.1312
+
+  Columns 379 through 385
+
+  -19.4452    7.5926   25.2432    8.0479  -21.8104  -22.6323    8.9848
+
+  Columns 386 through 392
+
+   30.2432    9.7215  -26.4592  -27.4752   10.8796   36.4235   11.6163
+
+  Columns 393 through 399
+
+  -31.3022  -32.1241   12.5532   41.4235   13.0085  -34.4893  -34.8032
+
+  Columns 400 through 406
+
+   13.3664   43.3333   13.3664  -34.8032  -34.4893   13.0085   41.4235
+
+  Columns 407 through 413
+
+   12.5532  -32.1241  -31.3022   11.6163   36.4235   10.8796  -27.4752
+
+  Columns 414 through 420
+
+  -26.4592    9.7215   30.2432    8.9848  -22.6323  -21.8104    8.0479
+
+  Columns 421 through 427
+
+   25.2432    7.5926  -19.4452  -19.1312    7.2348   23.3333    7.2348
+
+  Columns 428 through 434
+
+  -19.1312  -19.4452    7.5926   25.2432    8.0479  -21.8104  -22.6323
+
+  Columns 435 through 441
+
+    8.9848   30.2432    9.7215  -26.4592  -27.4752   10.8796   36.4235
+
+  Columns 442 through 448
+
+   11.6163  -31.3022  -32.1241   12.5532   41.4235   13.0085  -34.4893
+
+  Columns 449 through 455
+
+  -34.8032   13.3664   43.3333   13.3664  -34.8032  -34.4893   13.0085
+
+  Columns 456 through 462
+
+   41.4235   12.5532  -32.1241  -31.3022   11.6163   36.4235   10.8796
+
+  Columns 463 through 469
+
+  -27.4752  -26.4592    9.7215   30.2432    8.9848  -22.6323  -21.8104
+
+  Columns 470 through 476
+
+    8.0479   25.2432    7.5926  -19.4452  -19.1312    7.2348   23.3333
+
+  Columns 477 through 483
+
+    7.2348  -19.1312  -19.4452    7.5926   25.2432    8.0479  -21.8104
+
+  Columns 484 through 490
+
+  -22.6323    8.9848   30.2432    9.7215  -26.4592  -27.4752   10.8796
+
+  Columns 491 through 497
+
+   36.4235   11.6163  -31.3022  -32.1241   12.5532   41.4235   13.0085
+
+  Columns 498 through 501
+
+  -34.4893  -34.8032   13.3664   43.3333
+
+</pre><img vspace="5" hspace="5" src="ex1_01.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+% Ayush Basak 19ucc016
+
+
+t = 0:0.0001:0.05;
+Am = 10;
+fm = 200;
+fc = 2000;
+
+
+
+subplot(8,1,1)
+message = Am * cos (2 * pi * fm * t);
+plot(t, message)
+xlabel("Time");
+ylabel("amplitude");
+title("Message Signal")
+
+mu = 0.3;
+
+subplot(6,1,2)
+carrier = message/mu;
+plot(t, carrier);
+xlabel("Time");
+ylabel("amplitude");
+title("Carrier Signal")
+
+
+% mu = 0.3
+mu = 0.3;
+Ac = Am/mu;
+
+subplot(6,1,3)
+y_AM = (Ac * (1 + mu * cos (2 * pi * fm * t))) .* cos(2 * pi * fc * t);
+temp = y_AM
+plot(t, y_AM)
+xlabel("Time");
+ylabel("amplitude");
+title("Modulated Signal (30 %)")
+
+% mu = 0.5
+mu = 0.5;
+Ac = Am/mu;
+
+subplot(6,1,4)
+y_AM = (Ac * (1 + mu * cos (2 * pi * fm * t))) .* cos(2 * pi * fc * t);
+plot(t, y_AM)
+xlabel("Time");
+ylabel("amplitude");
+title("Modulated Signal (50 %)")
+
+% mu = 1
+mu = 1;
+Ac = Am/mu;
+
+subplot(6,1,5)
+y_AM = (Ac * (1 + mu * cos (2 * pi * fm * t))) .* cos(2 * pi * fc * t);
+plot(t, y_AM)
+xlabel("Time");
+ylabel("amplitude");
+title("Modulated Signal (100 %)")
+
+subplot(6,1,6)
+demodulated = abs(hilbert(temp));
+plot(t, demodulated);
+xlabel("Time");
+ylabel("amplitude");
+title("Dedulated Signal (30 %)")
+sgtitle("Ayush Basak 19ucc016")
+
+% Overmodulated
+subplot(1,1,1)
+mu = 1.3;
+Ac = Am/mu;
+y_AM = (Ac * (1 + mu * cos (2 * pi * fm * t))) .* cos(2 * pi * fc * t);
+plot(t, y_AM);
+xlabel("Time");
+ylabel("amplitude");
+title("Modulated Signal (130 %)")
+##### SOURCE END #####
+--></body></html>
