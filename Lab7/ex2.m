@@ -1,6 +1,3 @@
-% Ayush Basak 19ucc016
-
-% DSB SC 
 t = 0:0.005:5;
 Am = 5;
 Ac = 5;
@@ -31,10 +28,6 @@ plot(t, y_recovered);
 title("Demodulated");
 xlabel("Time")
 ylabel("Amplitude")
-
-sgtitle("Ayush Basak 19ucc016")
-
-
 figure()
 N = length(t);
 y = fft(y_DSBSC, N);

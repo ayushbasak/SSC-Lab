@@ -1,12 +1,7 @@
-% Ayush Basak 19ucc016
-
-
 t = 0:0.0001:0.05;
 Am = 10;
 fm = 200;
 fc = 2000;
-
-
 
 subplot(8,1,1)
 message = Am * cos (2 * pi * fm * t);
@@ -68,7 +63,6 @@ plot(t, demodulated);
 xlabel("Time");
 ylabel("amplitude");
 title("Dedulated Signal (30 %)")
-sgtitle("Ayush Basak 19ucc016")
 
 % Overmodulated
 figure()
